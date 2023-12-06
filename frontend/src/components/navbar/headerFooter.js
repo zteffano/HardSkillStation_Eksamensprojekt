@@ -8,10 +8,10 @@ class SpecialHeader extends HTMLElement {
                 </div>
             <nav>
                 <ul>
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">About</a></li>
-                    <li><a href="#">History</a></li>
-                    <li><a href="#">Kontakt</a></li>
+                    <li><a href="./home.html">Home</a></li>
+                    <li><a href="./about.html">About</a></li>
+                    <li><a href="./history.html">History</a></li>
+                    <li><a href="./contact.html">Kontakt</a></li>
                 </ul>
             </nav>
             <div class="buttons">
