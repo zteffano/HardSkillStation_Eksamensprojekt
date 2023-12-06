@@ -71,7 +71,6 @@ function createWorkshopElement(workshop) {
     workshopElement.classList.add('workshop');
 
     const startDato = formatDato(workshop.start);
-    const slutDato = formatDato(workshop.end);
     const statusTekst = workshop.status === 'completed' ? 'ikke plads' : 'stadig plads';
 
     workshopElement.innerHTML = `
