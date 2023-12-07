@@ -31,7 +31,7 @@ function sortArrayByDate(arrayToSort) {
         let workshopA = a.start;
         let workshopB = b.start;
         if (workshopA < workshopB) {
-            return 1;
+            return -1;
         }
         if (workshopA > workshopB) {
             return 1;
