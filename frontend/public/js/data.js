@@ -2,28 +2,31 @@ const GET_WORKSHOP_URL = "http://13.50.4.110:1337/workshops";
 
 var workshopList = [];
 
-// fecthing data from API and save it in session storage
-fetch(GET_WORKSHOP_URL)
-    .then(response => {
-        if(!response.ok) {
-            throw new Error("Network response was not ok");
-        }
-        return response.json();
-    })
-    .then (jsonData => {
-        jsonData.forEach(element => {
-            workshopList.push(element);
-        });
-        console.log('Data fetched and saved to workshoplist', workshopList);
-        sortArrayByDate(workshopList);
-        console.log('array sorted', workshopList);
-        displayAllWorkshops();
-            
-    })
-    .catch(error => {
-        // Handle any errors that occurred during the fetch
-        console.error('There was a problem fetching the data:', error);
+async function fetchData() {
+    // fecthing data from API and save it in session storage
+workshopList = fetch(GET_WORKSHOP_URL)
+.then(response => {
+    if(!response.ok) {
+        throw new Error("Network response was not ok");
+    }
+    return response.json();
+})
+.then (jsonData => {
+    jsonData.forEach(element => {
+        workshopList.push(element);
     });
+    console.log('Data fetched and saved to workshoplist', workshopList);
+    sortArrayByDate(workshopList);
+    console.log('array sorted', workshopList);
+    displayAllWorkshops();
+        
+})
+.catch(error => {
+    // Handle any errors that occurred during the fetch
+    console.error('There was a problem fetching the data:', error);
+});
+}
+
 
 // sort data by date
 function sortArrayByDate(arrayToSort) {
