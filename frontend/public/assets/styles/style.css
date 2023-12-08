@@ -14,13 +14,16 @@ main {
 
 .course {
     background-color: #6F3C8B;
-    height: 1000px;
 }
 
 button {
-    height: 30px;
     color: white;
     border: none;
+    background-color: #6F3C8B;
+    font-weight: bold;
+    padding: 10px 25px;
+    max-height: 35px;
+    min-width: 120px;
 }
 
 #courseOverviewCards {
@@ -72,9 +75,4 @@ button {
     margin-top: 5px;
     font-size: 14px;
     /* Adjust the font size based on your design */
-}
-
-.categoryBar {
-    height: 30px;
-    color: white;
 }

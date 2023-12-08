@@ -1,36 +1,152 @@
+export class HSSApi {
+
+    static async getWorkshops() {
+        try {
+            const response = await fetch("http://hss.zteffano.dk:1337/workshopsjoined");
+            return await response.json();
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    static async getCategories() {
+        try {
+            const response = await fetch("http://hss.zteffano.dk:1337/categories");
+            return await response.json();
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    static async getCompanies() {
+        try {
+            const response = await fetch("http://hss.zteffano.dk:1337/companies");
+            return await response.json();
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    static async getLocations() {
+        try {
+            const response = await fetch("http://hss.zteffano.dk:1337/locations");
+            return await response.json();
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    static async getAccounts() {
+        try {
+            const response = await fetch("http://hss.zteffano.dk:1337/accounts");
+            return await response.json();
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    static async getAccountTypes() {
+        try {
+            const response = await fetch("http://hss.zteffano.dk:1337/accounttypes");
+            return await response.json();
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    static async getAccountWorkshops() {
+        try {
+            const response = await fetch("http://hss.zteffano.dk:1337/accountworkshops");
+            return await response.json();
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    static async checkLogin(username, password) {
+        try {
+            const response = await fetch(`http://hss.zteffano.dk:1337/login`,
+            {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({username, password})
+            });
+            return await response.ok // returnere en bool værdi om login er ok elller ej
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+}
+
+export class HSSUtil {
+
+
+    static getById(array, id) {
+        return array.find(element => element.id == id);
+    }
+
+    // Kan bruges til fx. at finde et username, eller anden info baseret på et id 
+    static getByIdKey(array, id, key) {
+        return array.find(element => element.id == id)[key];
+    }
+    
+    static async accountWorkshopsWithNames() {
+        let accountWorkshopsWithNames = [];
+        let accountWorkshops = await HSSApi.getAccountWorkshops();
+        let accounts = await HSSApi.getAccounts();
+        let workshops = await HSSApi.getWorkshops();
+
+
+
+            accountWorkshops.forEach(accountWorkshop => {
+            let accountName = this.getByIdKey(accounts, accountWorkshop.accountId, 'username');
+            let workshopName = this.getByIdKey(workshops, accountWorkshop.workshopId, 'name');
+            accountWorkshopsWithNames.push({accountName, workshopName});
+            return accountWorkshopsWithNames;
+    
+    });
+    }
+    static sortByDate(arrayToSort, ascending = false) {
+   
+
+        arrayToSort.sort((a, b) => {
+            let workshopA = a.start;
+            let workshopB = b.start;
+            if (workshopA < workshopB) {
+                return ascending? -1 : 1;
+            }
+            if (workshopA > workshopB) {
+                return ascending? 1 : -1;
+            }
+            return 0;
+        })
+ 
+    }
+
+ 
+}
+
 
 export class Workshops {
-    WORKSHOP_URL = "http://hss.zteffano.dk:1337/workshopsjoined";
+
     workshops =  [];
     oldWorkshops = [];
     newWorkshops = [];
     dagensDato = new Date();
 
     constructor() {
-        this.fetchWorkshopData();
-        // kan kalde getNew og getOldworkshops metoder hvis det ønskes at lave dem fra start
-
-    }
-
-    async fetchWorkshopData() {
-        try{
-
-           
-            const response = await fetch(this.WORKSHOP_URL)
-
-            if(!response.ok)
-            {
-                throw new Error("Cant get workshops from ${WORKSHOP_URL}");
-            }
-            this.workshops = await response.json();
-            console.log("Netop fetch workshop data:")
-            console.log(this.workshops);
-            console.log("-----------------------");
-               
-        }
-        catch (error) { 
-            console.error("Error fetching or processing workshop data:", error);
-        }
+        // Bedre måde med HSSAPI klassen, så vi også fri for at have URL hardcoded i hver class if so.
+        HSSApi.getWorkshops().then(data => {
+            this.workshops = data;
+            this.sortWorkshopsByDate();
+            this.getNewWorkshops();
+            this.getOldWorkshops();
+            
+            
+        });
 
     }
 
@@ -45,9 +161,17 @@ export class Workshops {
     getOldWorkshops() {
 
         this.oldWorkshops = this.workshops.filter(element => { return new Date(element.start) < this.dagensDato});
-      
-  
+
         return this.oldWorkshops
+    }
+    
+    getWorkshopsByCategory(categoryId) {
+        return this.workshops.filter(element => {return element.categoryId == categoryId});
+    }
+    
+
+    searchWorkshops(searchString) {
+        return this.workshops.filter(element => {return element.name.includes(searchString)});
     }
     
 }
@@ -57,11 +181,14 @@ export class Display
         static workshopDisplay = document.getElementById("courseOverviewCards");
         static workshopObj = new Workshops();
 
-        static logDisplay() {
-            console.log(this.workshopDisplay);
-            console.log(this.workshopObj);
+        static async startUp(ascending = false) {
+            let workshops = await HSSApi.getWorkshops();
+            HSSUtil.sortByDate(workshops, ascending);
+            Display.displayWorkshopsData(workshops);
         }
 
+
+        
         static displaySpecificNewWorkshops(categoryID) {
             let newWorkshops = this.workshopObj.getNewWorkshops()
 
@@ -93,10 +220,41 @@ export class Display
             });
         }
 
+        static displayAllWorkshops() {
+            let workshops = this.workshopObj.workshops;
+            Display.workshopDisplay.innerHTML="";
+            workshops.forEach(element => {
+                const workshopElement = Display.createWorkshopElement(element);
+                Display.workshopDisplay.appendChild(workshopElement);
+            }
+            );
+        }
+
+        static displayWorkshopsData(data) {
+            Display.workshopDisplay.innerHTML="";
+            data.forEach(element => {
+                const workshopElement = Display.createWorkshopElement(element);
+                Display.workshopDisplay.appendChild(workshopElement);
+            }
+            );
+        }
+
+        static displayWorkshopsByCategory(categoryId) {
+            let workshops = this.workshopObj.getWorkshopsByCategory(categoryId);
+            Display.workshopDisplay.innerHTML="";
+            workshops.forEach(element => {
+                const workshopElement = Display.createWorkshopElement(element);
+                Display.workshopDisplay.appendChild(workshopElement);
+            }
+            );
+        }
+
+
+
         // create element for each workshop
     static createWorkshopElement(workshop) {
         const workshopElement = document.createElement('div');
-        workshopElement.classList.add('workshop');
+        workshopElement.classList.add('courseCard');
 
         const startDato = Display.formatDato(workshop.start);
         const statusTekst = workshop.status === 'completed' ? 'Kurset er desværre allerede fuldt booket' : 'stadig plads';
@@ -113,16 +271,16 @@ export class Display
             workshop.description;
 
         workshopElement.innerHTML = `
-            <div class="categoryBar"> ${workshop.categoryName}</div>
-            <div class="container">
-                <img class="workshopImage" src="${workshop.logo}" alt="${workshop.name}">
-                <h2 class="workshopTitle">${workshop.name}</h2>
-            </div>
-            <div class="workshopContent">
-                <p class="workshopDateAndLocation">${startDato}, ${city}</p>
-                <p class="workshopDiscription">${truncatedDescription}</p>
-                ${workshop.status !== 'completed' ? `<button class="button-link" onclick="redirectToPage('${workshop.workshopLink}')">Læs mere og tilmeld</button>` : `<p class="workshopStatus">${statusTekst}</p>`}
-            </div>
+        <div class="categoryBar"> ${workshop.categoryName}</div>
+        <div class="container">
+            <img class="workshopImage" src="${workshop.logo}" alt="${workshop.name}">
+            <h2 class="workshopTitle">${workshop.name}</h2>
+        </div>
+        <div class="workshopContent">
+            <p class="workshopDateAndLocation">${startDato}, ${city}</p>
+            <p class="workshopDiscription">${truncatedDescription}</p>
+            ${workshop.status !== 'completed' ? `<button class="button-link" onclick="redirectToPage('${workshop.workshopLink}')">Læs mere og tilmeld</button>` : `<p class="workshopStatus">${statusTekst}</p>`}
+        </div>
         `;
 
     // assign color to categoryBar by category
@@ -163,4 +321,4 @@ export class Display
 
 }
 
-
+  
