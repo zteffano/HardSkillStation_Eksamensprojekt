@@ -2,9 +2,9 @@ const GET_WORKSHOP_URL = "http://hss.zteffano.dk:1337/workshopsjoined";
 const GET_COMPANY_URL = "http://hss.zteffano.dk:1337/companies";
 
 var workshopList = [];
-var newWorkshops = [];
-var oldWorkshops = [];
-var companyData = [];
+//var newWorkshops = [];
+//var oldWorkshops = [];
+//var companyData = [];
 
 async function fetchWorkshopData() {
     try{
@@ -14,15 +14,15 @@ async function fetchWorkshopData() {
                 throw new Error("Network response for workshop was not ok");
             }
             return response.json();
-        })                     
+        })                 
+        workshopList = data;
     }
-    catch (error) {
-    console.error("Error fetching or processing workshop data:", error);
+    catch (error) { console.error("Error fetching or processing workshop data:", error);
     }
-    workshopList = JSON.parse(data);
-    let dagensDato = new Date();
-    newWorkshops = array.filter(element => { element.start >= dagensDato });
-    oldWorkshops = array.filter(element => { element.start < dagensDato })
+    //
+    //let dagensDato = new Date();
+    //newWorkshops = workshopList.filter(element => {return new Date(element.start) >= dagensDato});
+    //oldWorkshops = workshopList.filter(element => { return new Date(element.start) < dagensDato});
 }
 
 async function fetchCompanyData() {
@@ -41,4 +41,5 @@ async function fetchCompanyData() {
     companyData = JSON.parse(data);
 }
 
-fetchWorkshopData();
+
+console.log(workshopList);

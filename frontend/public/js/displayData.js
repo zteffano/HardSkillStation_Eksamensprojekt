@@ -1,7 +1,45 @@
+
 var workshopDisplay = document.getElementById("courseOverviewCards");
 
+
+
+function showWorkshop(workshopChoice)
+{ 
+
+// new - old
+
+fetchWorkshopData().then((data) => { 
+        let dagensDato = new Date();
+      
+        switch(workshopChoice)
+        {
+            case "new":
+                var newWorkshops = data.filter(element => {return new Date(element.start) >= dagensDato});
+                displayNewWorkshops(newWorkshops);
+                break;
+            
+            case "old":
+                var oldWorkshops = data.filter(element => { return new Date(element.start) < dagensDato});
+                displayOldWorkshops(oldWorkshops);
+                break;
+
+            default:
+                break;
+
+
+        }
+        //displayOldWorkshops(oldWorkshops);
+        //displayNewWorkshops(newWorkshops);
+        displaySpecificNewWorkshops(1, data);
+});
+} 
+
+
+
 // display workshops
-function displaySpecificNewWorkshops(categoryID) {
+function displaySpecificNewWorkshops(categoryID,data) {
+    let newWorkshops = data;
+    //newWorkshops.filter(element => element.categoryID = categoryID);
     workshopDisplay.innerHTML="";
     newWorkshops.forEach(element => {
         if(element.categoryId == categoryID) {
@@ -11,7 +49,8 @@ function displaySpecificNewWorkshops(categoryID) {
     });
 }
 
-function displayNewWorkshops() {
+function displayNewWorkshops(data) {
+    let newWorkshops = data;
     workshopDisplay.innerHTML="";
     newWorkshops.forEach(element => {
         const workshopElement = createWorkshopElement(element);
@@ -19,7 +58,8 @@ function displayNewWorkshops() {
     });
 }
 
-function displayOldWorkshops() {
+function displayOldWorkshops(data) {
+    let oldWorkshops = data;
     workshopDisplay.innerHTML="";
     oldWorkshops.forEach(element => {
         const workshopElement = createWorkshopElement(element);
@@ -97,5 +137,4 @@ function formatDato(datoStr) {
     return `${dag}. ${måned} ${år} kl. ${tid}`;
 }
 
-displayNewWorkshops();
 
