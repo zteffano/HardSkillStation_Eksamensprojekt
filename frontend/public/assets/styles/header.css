@@ -1,6 +1,6 @@
 #header {
     background-color: whitesmoke;
-    padding: 10px;
+    padding: 20px 50px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -12,22 +12,29 @@
 }
 
 .header-content {
-    max-width: 1000px;
+    max-width: 1200px;
     width: 100%;
     margin: 0 auto;
     display: flex;
     justify-content: space-between;
+    align-items: center;
 }
 
 .logo img {
     max-height: 40px;
     height: auto;
     margin-right: 10px;
+    vertical-align: text-bottom;
 }
 
 nav {
     display: flex;
     justify-content: center
+}
+
+nav a {
+    text-decoration: none;
+    color: black;
 }
 
 nav ul {
@@ -38,7 +45,14 @@ nav ul {
 }
 
 nav ul li {
-    margin-right: 20px;
+    margin: 10px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: large;
+}
+
+.languageSwitcher {
+    margin: 20px;
 }
 
 .buttons {
@@ -47,8 +61,9 @@ nav ul li {
 }
 
 .buttons button {
-    margin-left: 10px;
+    margin-left: 15px;
     background-color: #6F3C8B;
+    align-self: center;
 }
 
 .logo,

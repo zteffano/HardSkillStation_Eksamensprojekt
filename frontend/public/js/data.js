@@ -1,4 +1,4 @@
-const GET_WORKSHOP_URL = "http://13.50.4.110:1337/workshops";
+const GET_WORKSHOP_URL = "http://hss.zteffano.dk:1337/workshopsjoined";
 
 var workshopList = [];
 
@@ -55,9 +55,10 @@ function sortArrayByDate(arrayToSort) {
     })
 }
 
+
 // display workshops
 function displayAllWorkshops() {
-    var workshopDisplay = document.getElementById("workshopDisplay");
+    var workshopDisplay = document.getElementById("courseOverviewCards");
 
     workshopList.forEach(element => {
         const workshopElement = createWorkshopElement(element);
@@ -71,20 +72,53 @@ function createWorkshopElement(workshop) {
     workshopElement.classList.add('workshop');
 
     const startDato = formatDato(workshop.start);
-    const statusTekst = workshop.status === 'completed' ? 'ikke plads' : 'stadig plads';
+    const statusTekst = workshop.status === 'completed' ? 'Kurset er desværre allerede fuldt booket' : 'stadig plads';
+
+    // get city by locationAddress
+    const locationAddress = workshop.locationAddress;
+    console.log(locationAddress)
+    const parts = locationAddress.split(' ');
+    const city = parts.pop();
+
+    // Limit the workshop description to 50 characters 
+    const truncatedDescription = workshop.description.length > 150 ?
+        workshop.description.slice(0, 150) + ' ...' :
+        workshop.description;
 
     workshopElement.innerHTML = `
-        <div class="workshop-status ${workshop.status}">${statusTekst}</div>
-        <img class="workshop-image" src="${workshop.logo}" alt="${workshop.name}">
-        <div class="workshop-content">
-            <p class="workshop-date"> ${startDato}</p>
-            <p class="workshop-adress"> ${workshop.adress}</p>
-            <p class="workshop-firma"> ${workshop.firma}</p>
-            <h2 class="workshop-title">${workshop.name}</h2>
-            <p class="workshop-discription">${workshop.description}</p>
-            <a class="workshop-a" href="${workshop.workshopLink}" target="_blank">Læs mere og tilmeld</a>
+        <div class="categoryBar"> ${workshop.categoryName}</div>
+        <div class="container">
+            <img class="workshopImage" src="${workshop.logo}" alt="${workshop.name}">
+            <h2 class="workshopTitle">${workshop.name}</h2>
+        </div>
+        <div class="workshopContent">
+            <p class="workshopDateAndLocation">${startDato}, ${city}</p>
+            <p class="workshopDiscription">${truncatedDescription}</p>
+            ${workshop.status !== 'completed' ? `<button class="button-link" onclick="redirectToPage('${workshop.workshopLink}')">Læs mere og tilmeld</button>` : `<p class="workshopStatus">${statusTekst}</p>`}
         </div>
     `;
+
+// assign color to categoryBar by category
+const categoryElement = workshopElement.querySelector(".categoryBar");
+    switch (workshop.categoryName) {
+        case "Tech":
+            categoryElement.classList.add("tech");
+            break;
+        // Add more cases for other categories as needed
+        case "Social":
+            categoryElement.classList.add("social");
+            break;
+        case "Business":
+            categoryElement.classList.add("business");
+            break;
+        case "Creative":
+            categoryElement.classList.add("creative");
+            break;
+        default:
+            categoryElement.classList.add("other");
+            break;
+    }
+
     return workshopElement;
 }
 

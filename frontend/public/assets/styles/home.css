@@ -7,7 +7,8 @@
 #heroContent {
     display: flex;
     flex-direction: column;
-    max-width: 800px;
+    max-width: 900px;
+    padding: 25px;
     margin: 100px 0 100px 0;
 }
 
@@ -25,74 +26,4 @@
 
 .highlight {
     color: #6F3C8B;
-}
-
-#courseOverview {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-#courseOverviewContent {
-    max-width: 800px;
-}
-
-#courseOverviewSortButtons {
-    display: flex;
-    justify-content: space-evenly;
-}
-
-#courseOverviewSortButtons button {
-    width: 100px;
-}
-
-#courseOverviewCards {
-    margin: 100px 0 100px 0;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-}
-
-.courseCard {
-    width: calc(33.33% - 40px);
-    /* Adjust the width based on your design and margins */
-    margin: 20px;
-    text-align: center;
-    background-color: whitesmoke;
-}
-
-.tech {
-    background-color: #AC407C;
-}
-
-.social {
-    background-color: #FE845E;
-}
-
-.business {
-    background-color: #FEBB58;
-}
-
-.creative {
-    background-color: #E5586D;
-}
-
-.courseCard img {
-    width: 100%;
-    height: auto;
-    max-height: 150px;
-    /* Adjust the maximum height based on your design */
-    object-fit: cover;
-}
-
-.courseCard h2 {
-    margin-top: 10px;
-    font-size: 18px;
-    /* Adjust the font size based on your design */
-}
-
-.courseCard p {
-    margin-top: 5px;
-    font-size: 14px;
-    /* Adjust the font size based on your design */
 }

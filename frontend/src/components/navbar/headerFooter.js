@@ -15,9 +15,9 @@ class SpecialHeader extends HTMLElement {
                 </ul>
             </nav>
             <div class="buttons">
-                <button>Button 1</button>
-                <button>Button 2</button>
-                <button>Button 3</button>
+                <p class="languageSwitcher"><span style="font-weight: bold;">DK</span>|EN</p>
+                <button>Login</button>
+                <button>Tilmed</button>
             </div>
         </div>
     </header>
