@@ -1,3 +1,6 @@
+const GET_WORKSHOP_URL = "http://hss.zteffano.dk:1337/workshopsjoined";
+const GET_COMPANY_URL = "http://hss.zteffano.dk:1337/companies";
+
 var workshopList = [];
 var newWorkshops = [];
 var oldWorkshops = [];
@@ -24,7 +27,7 @@ async function fetchWorkshopData() {
 
 async function fetchCompanyData() {
     try{
-        var data = await fetch(GET_WORKSHOP_URL2)
+        var data = await fetch(GET_COMPANY_URL)
         .then(response => {
             if(!response.ok) {
                 throw new Error("Network response for companies was not ok");
@@ -37,3 +40,5 @@ async function fetchCompanyData() {
     }
     companyData = JSON.parse(data);
 }
+
+fetchWorkshopData();

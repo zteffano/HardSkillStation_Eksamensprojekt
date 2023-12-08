@@ -97,3 +97,5 @@ function formatDato(datoStr) {
     return `${dag}. ${måned} ${år} kl. ${tid}`;
 }
 
+displayNewWorkshops();
+
