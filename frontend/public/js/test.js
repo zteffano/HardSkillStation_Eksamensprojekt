@@ -1,4 +1,5 @@
-import { Display } from "./Workshop.js";
+import { Display } from "./DisplayClass.js";
+
 
 
 const techBtn = document.querySelector(".tech");
@@ -45,6 +46,9 @@ headerBtns[2].addEventListener('click', () => {
 });
 
 document.addEventListener('DOMContentLoaded', () => {
-    Display.startUp(); // Den vises nu i decending rækkefølge, hvis det skal være omvendt, kan der parses en true til metoden.
+    Display.startUp(true); // Den vises nu i decending rækkefølge, hvis det skal være omvendt, kan der parses en true til metoden.
+    Display.displayCompanies();
+    
+
 });
 
