@@ -8,7 +8,7 @@ class SpecialHeader extends HTMLElement {
                 </div>
             <nav>
                 <ul>
-                    <li><a href="./home.html">Home</a></li>
+                    <li><a href="./index.html">Home</a></li>
                     <li><a href="./about.html">About</a></li>
                     <li><a href="./history.html">History</a></li>
                     <li><a href="./contact.html">Kontakt</a></li>

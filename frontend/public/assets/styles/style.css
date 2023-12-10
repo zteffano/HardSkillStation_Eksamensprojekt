@@ -76,3 +76,15 @@ button {
     font-size: 14px;
     /* Adjust the font size based on your design */
 }
+
+.workshopCompany {
+   
+    font-size: 14px;
+    font-weight: bold;
+    color: rgb(70, 70, 70);
+    letter-spacing: 2px;
+}
+
+.noShow  {
+    display:none;
+}
