@@ -29,6 +29,7 @@ creativeBtn.addEventListener('click', () => {
 
 /* Lagt de gamle kald på knapperne i Headeren */
 
+/*
 const headerBtns = document.querySelectorAll(".buttons button");
 
 headerBtns[0].innerHTML = "Alle WS";
@@ -44,7 +45,7 @@ headerBtns[1].addEventListener('click', () => {
 headerBtns[2].addEventListener('click', () => {
     Display.displayOldWorkshops();
 });
-
+*/
 document.addEventListener('DOMContentLoaded', () => {
     Display.startUp(true); // Den vises nu i decending rækkefølge, hvis det skal være omvendt, kan der parses en true til metoden.
     Display.displayCompanies();
