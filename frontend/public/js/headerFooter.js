@@ -1,39 +1,52 @@
+
 class SpecialHeader extends HTMLElement {
     connectedCallback() {
-        this.innerHTML = `
-            <header id="header">
-                <div class="header-content">
-                    <div class="logo">
-                        <img src="assets/images/HSS_Logo.webp" alt="Logo">
+            this.innerHTML = `
+                <header id="header">
+                    <div class="header-content">
+                        <div class="logo">
+                            <img src="assets/images/HSS_Logo.webp" alt="Logo">
+                        </div>
+                        <a href="#" class="toggle-button">
+                            <span class="bar"></span>
+                            <span class="bar"></span>
+                            <span class="bar"></span>
+                        </a>
+                        <nav class="navigation">
+                            <ul>
+                                <li><a href="./index.html" class="nav-link">Hjem</a></li>
+                                <li><a href="./about.html" class="nav-link">Om os</a></li>
+                                <li><a href="./history.html" class="nav-link">Tidligere</a></li>
+                                <li><a href="./contact.html" class="nav-link">Kontakt</a></li>
+                            </ul>
+                        </nav>
+                        <div class="buttons">
+                            <p class="languageSwitcher"><span style="font-weight: bold;">DK</span>|EN</p>
+                            <button>Login</button>
+                            <button class="secondButtonStyle">Tilmed</button>
+                        </div>
                     </div>
-                    <nav>
-                        <ul>
-                            <li><a href="./index.html" class="nav-link">Hjem</a></li>
-                            <li><a href="./about.html" class="nav-link">Om os</a></li>
-                            <li><a href="./history.html" class="nav-link">Tidligere</a></li>
-                            <li><a href="./contact.html" class="nav-link">Kontakt</a></li>
-                        </ul>
-                    </nav>
-                    <div class="buttons">
-                        <p class="languageSwitcher"><span style="font-weight: bold;">DK</span>|EN</p>
-                        <button>Login</button>
-                        <button class="secondButtonStyle">Tilmed</button>
-                    </div>
-                </div>
-            </header>
-        `;
+                </header>
+            `;
+    
+            // Find active link and change font size
+            const currentPage = window.location.pathname.split('/').pop(); // Determine current page
+            const navLinks = this.querySelectorAll('.nav-link');
 
-        // Find active link and change font size
-        const currentPage = window.location.pathname.split('/').pop(); // Determine current page
-        const navLinks = this.querySelectorAll('.nav-link');
+            var toggleButton = document.getElementsByClassName("toggle-button")[0];
+            var navbar = document.getElementsByClassName("navigation")[0];
 
-        navLinks.forEach(link => {
-            const linkPage = link.getAttribute('href').split('/').pop();
-            if (linkPage === currentPage) {
-                link.style.fontSize = '22px';
-                link.style.color = '#6F3C8B';
-            }
-        });
+            toggleButton.addEventListener("click", () => {
+                navbar.classList.toggle("active")
+            })
+    
+            navLinks.forEach(link => {
+                const linkPage = link.getAttribute('href').split('/').pop();
+                if (linkPage === currentPage) {
+                    link.style.fontSize = '22px';
+                    link.style.color = '#6F3C8B';
+                }
+            });
     } 
 }
 
