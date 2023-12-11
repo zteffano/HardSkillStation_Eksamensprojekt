@@ -8,9 +8,9 @@ class SpecialHeader extends HTMLElement {
                     </div>
                     <nav>
                         <ul>
-                            <li><a href="./home.html" class="nav-link">Home</a></li>
-                            <li><a href="./about.html" class="nav-link">About</a></li>
-                            <li><a href="./history.html" class="nav-link">History</a></li>
+                            <li><a href="./index.html" class="nav-link">Hjem</a></li>
+                            <li><a href="./about.html" class="nav-link">Om os</a></li>
+                            <li><a href="./history.html" class="nav-link">Tidligere</a></li>
                             <li><a href="./contact.html" class="nav-link">Kontakt</a></li>
                         </ul>
                     </nav>
