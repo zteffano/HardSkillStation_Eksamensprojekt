@@ -5,6 +5,10 @@ body {
     font-family: Arial, Helvetica, sans-serif;
 }
 
+p {
+    font-size: 18px;
+}
+
 main {
     display: flex;
     flex-direction: column;
@@ -24,6 +28,24 @@ button {
     padding: 10px 25px;
     max-height: 35px;
     min-width: 120px;
+    transition: background-color 0.3s ease;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #8352A0;
+    cursor: pointer;
+}
+
+.secondButtonStyle {
+    color: black;
+    border: 2px solid #6F3C8B;
+    background-color: whitesmoke;
+}
+
+.secondButtonStyle:hover {
+    background-color: #dcd4e0;
+    ;
 }
 
 #courseOverviewCards {
@@ -73,6 +95,5 @@ button {
 
 .courseCard p {
     margin-top: 5px;
-    font-size: 14px;
     /* Adjust the font size based on your design */
 }

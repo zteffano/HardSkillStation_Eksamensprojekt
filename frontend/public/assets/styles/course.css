@@ -5,7 +5,7 @@
 }
 
 #courseOverviewContent {
-    max-width: 940px;
+    max-width: 1200px;
 }
 
 #courseOverviewSortButtons {
@@ -21,17 +21,18 @@
 }
 
 #courseOverviewCards {
-    margin: 100px 0 100px 0;
     display: flex;
     flex-wrap: wrap;
-    justify-content: flex-start;
+    justify-content: space-around;
 }
 
 .workshop {
-    width: calc(33.33% - 40px);
+    flex: 0 1 calc(33.33% - 40px);
+    min-width: 350px;
     margin: 20px;
     text-align: center;
     background-color: whitesmoke;
+    box-sizing: border-box;
 }
 
 .categoryBar {
@@ -70,6 +71,10 @@
     height: 200px;
 }
 
+.workshopContent {
+    margin: 20px;
+}
+
 .workshopContent button {
     margin-top: auto;
 }
@@ -77,7 +82,7 @@
 .workshopTitle {
     position: absolute;
     bottom: 0;
-    font-size: 18px;
+    font-size: 22px;
     color: white;
     text-align: left;
     padding: 0;
