@@ -20,24 +20,8 @@ class SpecialHeader extends HTMLElement {
                         <button class="secondButtonStyle">Tilmed</button>
                     </div>
                 </div>
-            <nav>
-                <ul>
-                    <li><a href="./index.html">Hjem</a></li>
-                    <li><a href="./about.html">Om os</a></li>
-                    <li><a href="./history.html">Historie</a></li>
-                    <li><a href="./contact.html">Kontakt</a></li>
-                </ul>
-            </nav>
-            <div class="buttons">
-                <p class="languageSwitcher"><span style="font-weight: bold;">DK</span>|EN</p>
-                <button>Login</button>
-                <button>Tilmed</button>
-            </div>
-        </div>
-    </header>
-        `
-    }
- }
+            </header>
+        `;
 
         // Find active link and change font size
         const currentPage = window.location.pathname.split('/').pop(); // Determine current page
