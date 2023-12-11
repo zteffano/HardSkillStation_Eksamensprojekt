@@ -2,14 +2,34 @@
     display: flex;
     flex-direction: column;
     align-self: center;
+    width: 100%;
+    background-color: #dcd4e0;
 }
+
+/*     background-image: url("/HardSkillStation_Eksamensprojekt/frontend/public/assets/images/SDU.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+
+#hero::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: #dcd4e0;
+    opacity: 0.5;
+} */
 
 #heroContent {
     display: flex;
     flex-direction: column;
-    max-width: 900px;
+    max-width: 1150px;
     padding: 25px;
     margin: 100px 0 100px 0;
+    align-self: center;
 }
 
 #hero h1 {
@@ -26,4 +46,38 @@
 
 .highlight {
     color: #6F3C8B;
+}
+
+.unlock,
+.your,
+.potential {
+    transition: color 1s ease-in-out, text-shadow 1s ease-in-out;
+}
+
+.unlock {
+    animation: shineText 1s 1s forwards, colorChange 1s 1s forwards;
+}
+
+.your {
+    animation: shineText 1s 2s forwards, colorChange 1s 2s forwards;
+}
+
+.potential {
+    animation: shineText 1s 3s forwards, colorChange 1s 3s forwards;
+}
+
+@keyframes shineText {
+    0% {}
+
+    50% {
+        text-shadow: 0 0 10px #6F3C8B;
+    }
+
+    100% {}
+}
+
+@keyframes colorChange {
+    50% {
+        color: #6F3C8B;
+    }
 }

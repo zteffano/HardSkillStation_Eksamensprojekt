@@ -5,24 +5,40 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="assets/styles/style.css">
-    <link rel="stylesheet" href="assets/styles/home.css">
     <link rel="stylesheet" href="assets/styles/header.css">
     <link rel="stylesheet" href="assets/styles/footer.css">
-    <link rel="stylesheet" href="assets/styles/footer.css">
+    <link rel="stylesheet" href="assets/styles/contact.css">
     <title>Document</title>
 </head>
 
 <body>
     <special-header></special-header>
     <main>
-        <section class="importentContent>">
-            <h1 class="importentContentHeading">About hard Skills Station</h1>
-        </section>
-        <section class="course">
-            <p> Hello we are HSS</p>
-            <p> intro video</p>
-            <p> workers</p>
+        <section class="contact">
+            <div class="contactCard">
+                <div class="formContainer">
+                    <form class="form">
+                        <label for="name">dit navn</label>
+                        <input type="text" id="name" name="name" required>
 
+                        <label for="email">din mail</label>
+                        <input type="email" id="email" name="email" required>
+
+                        <label for="message">din besked</label>
+                        <textarea id="message" name="message" rows="4" required></textarea>
+
+                        <button id="contactButton">send besked</button>
+                    </form>
+                </div>
+
+                <div class="textContainer">
+                    <h1 class="contactHeading">Har du spørgsmål eller forslag til arrangementer? Spørg mig!</h1>
+                    <img src="/HardSkillStation_Eksamensprojekt/frontend/public/assets/images/Biljana.png"
+                        alt="Portait of Biljana Sejer">
+                    <p>Biljana Seier, projektleder</p>
+                    <a href="mailto:bcse@iba.dk">bcse@iba.dk</a>
+                </div>
+            </div>
         </section>
     </main>
     <special-footer></special-footer>
