@@ -50,8 +50,7 @@ class SpecialHeader extends HTMLElement {
                 link.style.color = '#6F3C8B';
             }
         });
-    }
-}
+
 
 class SpecialFooter extends HTMLElement {
     connectedCallback() {
