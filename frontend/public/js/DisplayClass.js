@@ -10,7 +10,20 @@ export class Display
             
         static async startUp(ascending = false) {
             let workshops = await HSSApi.getWorkshops();
-            workshops = workshops.filter(element => {return new Date(element.start) >= new Date()});
+
+            let urllocation = window.location.href.split("/"); 
+            let side = urllocation[urllocation.length - 1];
+            switch (side) {
+
+                case "history.html":
+                    workshops = workshops.filter(element => {return new Date(element.start) < new Date()});
+                    break;
+        
+                default:
+                    workshops = workshops.filter(element => {return new Date(element.start) >= new Date()});
+                    break;
+            }
+            
            
             HSSUtil.sortByDate(workshops, ascending);
             Display.displayWorkshopsData(workshops);

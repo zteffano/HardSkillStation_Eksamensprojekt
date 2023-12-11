@@ -28,7 +28,7 @@ creativeBtn.addEventListener('click', () => {
 });
 
 document.addEventListener('DOMContentLoaded', () => {
-    Display.startUp(true); // Den vises nu i decending rækkefølge, hvis det skal være omvendt, kan der parses en true til metoden.
+    Display.startUp(true);
     Display.displayCompanies();    
 
 });
