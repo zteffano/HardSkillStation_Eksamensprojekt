@@ -81,9 +81,10 @@ function createWorkshopElement(workshop) {
     const city = parts.pop();
 
     // Limit the workshop description to 50 characters 
-    const truncatedDescription = workshop.description.length > 150 ?
-        workshop.description.slice(0, 150) + ' ...' :
+    const truncatedDescription = workshop.description.length > 10 ?
+        workshop.description.slice(0, 10) + ' ...' :
         workshop.description;
+        console.log(truncatedDescription)
 
     workshopElement.innerHTML = `
         <div class="categoryBar"> ${workshop.categoryName}</div>
@@ -104,7 +105,6 @@ const categoryElement = workshopElement.querySelector(".categoryBar");
         case "Tech":
             categoryElement.classList.add("tech");
             break;
-        // Add more cases for other categories as needed
         case "Social":
             categoryElement.classList.add("social");
             break;

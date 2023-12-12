@@ -33,8 +33,10 @@ class SpecialHeader extends HTMLElement {
             const currentPage = window.location.pathname.split('/').pop(); // Determine current page
             const navLinks = this.querySelectorAll('.nav-link');
 
+
             var toggleButton = document.getElementsByClassName("toggle-button")[0];
             var navbar = document.getElementsByClassName("navigation")[0];
+
 
             toggleButton.addEventListener("click", () => {
                 navbar.classList.toggle("active")

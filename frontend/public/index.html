@@ -9,15 +9,19 @@
     <link rel="stylesheet" href="assets/styles/header.css">
     <link rel="stylesheet" href="assets/styles/footer.css">
     <link rel="stylesheet" href="assets/styles/course.css">
+    <link rel="stylesheet" href="assets/styles/cardForm.css">
     <title>Document</title>
 </head>
 
 <body>
     <special-header></special-header>
     <main>
+        <div class="overlay" id="overlay"></div>
         <section id="hero">
             <section id="heroContent">
-                <h1 id="heroContentHeading"><span class="unlock">Opnå</span> <span class="your">dit</span> <span class="full">fulde</span> <span class="potential">potentiale</span></h1>
+                <h1 id="heroContentHeading"><span class="opna">Opnå</span> <span class="dit">dit</span> <span
+                        class="fulde">fulde</span> <span class="potentiale">potentiale</span>
+                </h1>
                 <p>I samarbejde med virksomheder i Kolding tilbyder vi studerende og alumner enestående muligheder for
                     kompetenceudvikling. Vores kurser dækker et bredt spektrum, herunder Power BI, programmering og
                     no-code,
@@ -30,27 +34,26 @@
         <section id="courseOverview" class="course">
             <section id="courseOverviewContent">
                 <section id="courseOverviewSortButtons">
-                    <button class="tech">Tech</button>
-                    <button class="social">Social</button>
-                    <button class="business">Business</button>
-                    <button class="creative">Kreativ</button>
+                    <button class="tech" id="tech">Tech</button>
+                    <button class="social" id="social">Social</button>
+                    <button class="business" id="business">Business</button>
+                    <button class="creative" id="creative">Kreativ</button>
                 </section>
                 <section id="courseOverviewCards">
-                    <div id="workshopDisplay">
-
-                    </div>
-                    
-
-  
+                    <div id="workshopDisplay"></div>
                 </section>
             </section>
         </section>
+        <div id="formPopup">
+            <p>form</p>
+        </div>
     </main>
     <special-footer></special-footer>
 
 
     <script src="./js/headerFooter.js"></script>
     <script type="module" src="./js/test.js"></script>
+    <script src="./js/cardForm.js"></script>
 </body>
 
 </html>
