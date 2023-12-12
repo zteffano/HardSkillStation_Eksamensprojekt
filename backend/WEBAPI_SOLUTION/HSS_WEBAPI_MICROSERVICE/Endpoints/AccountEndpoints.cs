@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using HSS_WEBAPI_MICROSERVICE.Context;
 using HSS_WEBAPI_MICROSERVICE.DTO.AccountDTO;
+using HSS_WEBAPI_MICROSERVICE.DTO.WorkshopDTO;
 using HSS_WEBAPI_MICROSERVICE.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -58,6 +59,27 @@ namespace HSS_WEBAPI_MICROSERVICE.Endpoints
 				return Results.Ok($"Brugeren med id: {id} er nu slettet");
 
 			}).WithTags("Account Endpoints");
+
+			app.MapGet("/account/{accountId}/workshops", async (HSSContext context, int accountId, IMapper mapper) =>
+			{
+				var workshops = await context.AccountWorkshops
+					.Where(aw => aw.AccountId == accountId)
+					.Join(context.Workshops,
+						accountWorkshop => accountWorkshop.WorkshopId,
+						workshop => workshop.Id,
+						(accountWorkshop, workshop) => workshop)
+					.ToListAsync();
+
+				if (workshops == null || !workshops.Any())
+				{
+					return Results.NotFound($"Ingen workshops fundet for AccountID {accountId}");
+				}
+
+				List<WorkshopGetDTO> workshopsDTOs = mapper.Map<List<WorkshopGetDTO>>(workshops);
+
+				return Results.Ok(workshopsDTOs);
+			}).WithTags("Account Endpoints");
+	
 		}
 
 		public static void MapLoginEndPoint(this WebApplication app)
@@ -76,7 +98,8 @@ namespace HSS_WEBAPI_MICROSERVICE.Endpoints
 					{
 						if (account.Password == accountLoginDTO.Password)
 						{
-							return Results.Ok("Fint");
+							List<int> ids = new List<int>() { account.Id, account.AccountTypeId };
+							return Results.Ok(ids);
 						}
 					}
 				}
