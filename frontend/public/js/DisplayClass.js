@@ -121,8 +121,12 @@ export class Display
 
         // create element for each workshop
     static createWorkshopElement(workshop) {
+       
         const workshopElement = document.createElement('div');
+        const workshopId = workshop.id;
+
         workshopElement.classList.add('courseCard');
+        workshopElement.id = `workshop-${workshop.id}`;
 
         const startDato = Display.formatDato(workshop.start);
         const statusTekst = workshop.status === 'closed' ? 'Kurset er desværre allerede fuldt booket' : 'stadig plads';
@@ -153,11 +157,14 @@ export class Display
         `;
 
     // Add the click event listener to open formPopup to each element with the class "button-link"
-    const cardButtons = document.getElementsByClassName("button-link");
+    const cardButtons = document.querySelectorAll(".button-link");
+
     const overlay = document.getElementById("overlay");
     const popupForm = document.getElementById("formPopup");
 
+
     function openForm() {
+
         popupForm.style.display = "block";
         overlay.style.display = "block"
     }
@@ -166,13 +173,28 @@ export class Display
         popupForm.style.display = "none";
         overlay.style.display = "none";
     }
+    
+    cardButtons.forEach(card => {
         
-    for (const cardButton of cardButtons) {
-    cardButton.addEventListener("click", openForm);
-    }
+        card.addEventListener('click', ()=> {
+            
+            let clickedWorkshopId = card.parentNode.parentNode.id.split("-");
+            clickedWorkshopId = clickedWorkshopId[clickedWorkshopId.length - 1];
+      
+            let allWorkshops = Display.workshopObj.workshops.filter(item => item.id == clickedWorkshopId);
+            createWorkshopPopup(allWorkshops[0]);
+            openForm();
+        });
+    });
+
+
+
+
+
     
     overlay.addEventListener("click", closeForm);
-
+    function createWorkshopPopup(workshop)
+    {
     const workshopPopup = document.getElementById("formPopup");
     workshopPopup.innerHTML = `
         <div class="close-btn">X</div>
@@ -188,10 +210,31 @@ export class Display
             ${workshop.status !== 'closed' ? `<button class="button-link">Tilmeld</button>` : `<p id="workshopStatus">${statusTekst}</p>`}
         </div>
     `;
+        // Get the close button element and add a click event listener
+        const closeButton = workshopPopup.querySelector(".close-btn");
+        closeButton.addEventListener("click", closeForm);
+        const categoryPopupElement = workshopPopup.querySelector(".categoryBar");
+
+        switch (workshop.categoryName) {
+            case "Tech":
+                categoryPopupElement.classList.add("tech");
+                break;
+            case "Social":
+                categoryPopupElement.classList.add("social");
+                break;
+            case "Business":
+                categoryPopupElement.classList.add("business");
+                break;
+            case "Creative":
+                categoryPopupElement.classList.add("creative");
+                break;
+            default:
+                categoryPopupElement.classList.add("other");
+                break;
+        } 
+    }
     
-    // Get the close button element and add a click event listener
-    const closeButton = workshopPopup.querySelector(".close-btn");
-    closeButton.addEventListener("click", closeForm);
+
 
     // assign color to categoryBar by category
     const categoryElement = workshopElement.querySelector(".categoryBar");
@@ -213,24 +256,6 @@ export class Display
                 break;
         }
 
-        const categoryPopupElement = workshopPopup.querySelector(".categoryBar");
-        switch (workshop.categoryName) {
-            case "Tech":
-                categoryPopupElement.classList.add("tech");
-                break;
-            case "Social":
-                categoryPopupElement.classList.add("social");
-                break;
-            case "Business":
-                categoryPopupElement.classList.add("business");
-                break;
-            case "Creative":
-                categoryPopupElement.classList.add("creative");
-                break;
-            default:
-                categoryPopupElement.classList.add("other");
-                break;
-        }
 
         return workshopElement;
     }
