@@ -36,10 +36,12 @@ class SpecialHeader extends HTMLElement {
 
             var toggleButton = document.getElementsByClassName("toggle-button")[0];
             var navbar = document.getElementsByClassName("navigation")[0];
+            var buttons = document.getElementsByClassName("buttons")[0];
 
 
             toggleButton.addEventListener("click", () => {
                 navbar.classList.toggle("active")
+                buttons.classList.toggle("active")
             })
     
             navLinks.forEach(link => {

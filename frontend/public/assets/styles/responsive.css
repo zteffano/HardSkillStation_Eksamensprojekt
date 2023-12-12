@@ -33,6 +33,11 @@
         margin-left: unset;
         justify-content: center;
         align-items: center;
+        display: none;
+    }
+
+    .buttons.active {
+        display: flex;
     }
     
     .header-content {
