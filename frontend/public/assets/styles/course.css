@@ -5,34 +5,42 @@
 }
 
 #courseOverviewContent {
-    max-width: 1200px;
+    max-width: 1150px;
 }
 
 #courseOverviewSortButtons {
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-between;
+    margin-top: -17px;
+    margin-left: 30px;
+    margin-right: 30px;
 }
 
 #courseOverviewSortButtons button {
-    width: 150px;
+    width: 23%;
     text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     font-weight: bold;
     font-size: 16px;
+    min-width: unset;
 }
 
 #courseOverviewCards {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-around;
+    justify-content: space-between;
+    margin-top: 100px;
+    margin-bottom: 100px;
+    padding-left: 11px;
+    padding-right: 11px;
 }
 
-.workshop {
-    flex: 0 1 calc(33.33% - 40px);
-    min-width: 350px;
-    margin: 20px;
-    text-align: center;
-    background-color: whitesmoke;
+.courseCard {
+    flex: 1 1 min(33.33%, 300px);
+    margin-bottom: 20px;
     box-sizing: border-box;
+    background-color: whitesmoke;
+    margin: 20px;
+    min-width: 300px;
 }
 
 .categoryBar {
@@ -43,24 +51,20 @@
     color: white;
 }
 
-.tech {
-    background-color: #AC407C;
+#tech:hover {
+    background-color: #FF6666;
 }
 
-.social {
-    background-color: #FE845E;
+#social:hover {
+    background-color: #A864F7;
 }
 
-.business {
-    background-color: #FEBB58;
+#business:hover {
+    background-color: #FF3399;
 }
 
-.creative {
-    background-color: #E5586D;
-}
-
-.other {
-    background-color: #617FFC;
+#creative:hover {
+    background-color: #FFD64D;
 }
 
 .workshopContent {
@@ -117,8 +121,19 @@
     margin: 0;
 }
 
-.workshopStatus {
+#workshopStatus {
     font-weight: bold;
     margin-top: auto;
     margin-bottom: 0;
+}
+
+@media screen and (max-width: 768px) {
+    #courseOverviewSortButtons {
+        margin: 0;
+    }
+
+    #courseOverviewSortButtons button {
+        padding: 10px;
+        width: 25%;
+    }
 }
