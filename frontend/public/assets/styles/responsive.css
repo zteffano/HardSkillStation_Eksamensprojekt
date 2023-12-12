@@ -75,4 +75,12 @@
     nav.active {
         display: flex;
     }
+
+     .profile-header-container {
+        display: flex;
+        scale:1;
+        position:relative;
+        top:-25px;
+       
+    } 
 }
