@@ -81,7 +81,7 @@ namespace HSS_WEBAPI_MICROSERVICE.Endpoints
 
 			}).WithTags(swaggerHeading);
 
-			
+
 
 			/* OBS der skal evt. også slettes i account_workshop ved samme lejlighed - skal vi have kigget på */
 			app.MapDelete("/deleteworkshop/{id}", async (HSSContext context, int id) =>
@@ -93,12 +93,22 @@ namespace HSS_WEBAPI_MICROSERVICE.Endpoints
 					return Results.NotFound($"Workshop med {id} blev ikke fundet");
 				}
 
+				// Først, find og slet alle tilknyttede AccountWorkshop entries
+				var accountWorkshops = context.AccountWorkshops.Where(aw => aw.WorkshopId == id);
+				if (accountWorkshops.Any())
+				{
+					context.AccountWorkshops.RemoveRange(accountWorkshops);
+					await context.SaveChangesAsync();
+				}
+
+				// Derefter slet selve workshoppen
 				context.Workshops.Remove(workshop);
 				await context.SaveChangesAsync();
 
 				return Results.Ok($"Workshop med id: {id} er nu slettet");
 
-			}).WithTags(swaggerHeading);
+			}).WithTags(swaggerHeading); // Erstat "Workshop Endpoints" med den korrekte tag
+
 		}
 	}
 }
