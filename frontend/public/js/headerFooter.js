@@ -5,7 +5,7 @@ class SpecialHeader extends HTMLElement {
                 <header id="header">
                     <div class="header-content">
                         <div class="logo">
-                            <img src="assets/images/HSS_Logo.webp" alt="Logo">
+                            <a href="./index.html"><img src="assets/images/HSS_Logo.webp" alt="Logo"></a>
                         </div>
                         <a href="#" class="toggle-button">
                             <span class="bar"></span>
@@ -48,7 +48,8 @@ class SpecialHeader extends HTMLElement {
                 const linkPage = link.getAttribute('href').split('/').pop();
                 if (linkPage === currentPage) {
                     link.style.fontSize = '22px';
-                    link.style.color = '#6F3C8B';
+                    link.style.color = '#002754';
+                    link.style.textDecoration = 'underline';
                 }
             });
     } 

@@ -9,10 +9,18 @@
 #heroContent {
     display: flex;
     flex-direction: column;
-    max-width: 1100px;
-    padding: 30px;
+    max-width: 1140px;
     margin: 100px 0 100px 0;
     align-self: center;
+}
+
+#heroContentHeading {
+    display: flex;
+    flex-direction: column;
+    max-width: 1140px;
+    margin: 100px 0 100px 0;
+    align-self: center;
+    margin: 0 30px;
 }
 
 #hero h1 {
@@ -23,8 +31,48 @@
     margin: 0;
 }
 
-#hero p {
+#hero h2 {
+    margin-bottom: 0;
+}
+
+#heroContentText {
+    display: flex;
     line-height: 150%;
+    flex-wrap: wrap;
+}
+
+#heroContentTextLeft,
+#heroContentTextRight {
+    flex: 1;
+    min-width: 300px;
+    padding: 30px;
+}
+
+#heroContentTextRight .social-link {
+    display: inline-block;
+    height: 65px;
+    width: 65px;
+    margin-right: 14px;
+    background-size: cover;
+    transition: background-image 0.3s ease-in-out;
+    cursor: pointer;
+    /* Added cursor style */
+}
+
+#heroContentTextRight .social-link.instagram {
+    background-image: url('../images/InstagramLogo.webp');
+}
+
+#heroContentTextRight .social-link.facebook {
+    background-image: url('../images/FacebookLogo.webp');
+}
+
+#heroContentTextRight .social-link:hover {
+    background-image: url('../images/InstagramLogoBlue.webp');
+}
+
+#heroContentTextRight .social-link.facebook:hover {
+    background-image: url('../images/FacebookLogoBlue.webp');
 }
 
 .opna,
@@ -54,7 +102,7 @@
     0% {}
 
     50% {
-        text-shadow: 0 0 10px #3E5386;
+        text-shadow: 0 0 10px #002754;
     }
 
     100% {}
@@ -62,11 +110,11 @@
 
 @keyframes colorChange {
     50% {
-        color: #3E5386;
+        color: #002754;
     }
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 720px) {
     #hero h1 {
         font-size: 50px;
     }
@@ -77,5 +125,13 @@
         max-width: 1100px;
         margin: 30px 0 30px 0;
         align-self: center;
+    }
+
+    #heroContentTextLeft {
+        padding-bottom: 0;
+    }
+
+    #heroContentTextRight {
+        padding-top: 0;
     }
 }
