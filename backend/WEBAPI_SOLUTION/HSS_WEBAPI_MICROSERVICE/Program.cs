@@ -32,7 +32,7 @@ namespace HSS_WEBAPI_MICROSERVICE
 			.Replace("(DB_DATABASENAME)", Environment.GetEnvironmentVariable("DB_DATABASENAME"));
 
 			//Skal kommenteres ud, hvis der ikke testes på lokal database, ellers overrider den vores connectionstring logic.
-			connectionString = builder.Configuration.GetConnectionString("TestConnection");
+			//connectionString = builder.Configuration.GetConnectionString("TestConnection");
 
 			builder.Services.AddDbContext<HSSContext>(options => options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
 
