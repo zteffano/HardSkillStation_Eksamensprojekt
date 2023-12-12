@@ -1,0 +1,78 @@
+.toggle-button {
+    position: absolute;
+    position: .75rem;
+    right: 1rem;
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 30px;
+    height: 21px;
+}
+
+.toggle-button .bar {
+    height: 3px;
+    width: 100%;
+    background-color: black;
+    border-radius: 10px;
+}
+
+@media (max-width: 1020px) {
+    .toggle-button {
+        display: flex;
+        padding: 1.2rem 1.4rem;
+
+    }
+
+    .logo {
+        margin: .5rem;
+    }
+
+    .buttons {
+        width: 100%;
+        order: 1;
+        margin-left: unset;
+        justify-content: center;
+        align-items: center;
+        display: none;
+    }
+
+    .buttons.active {
+        display: flex;
+    }
+
+    .header-content {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    #header {
+        justify-content: space-between;
+        display: flex;
+        align-items: center;
+        padding-left: 22px;
+    }
+
+    nav {
+        display: none;
+        width: 100%;
+        order: 2;
+    }
+
+    nav ul {
+        width: 100%;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    nav li {
+        text-align: center;
+    }
+
+    nav li a {
+        padding: .5rem 1rem;
+    }
+
+    nav.active {
+        display: flex;
+    }
+}

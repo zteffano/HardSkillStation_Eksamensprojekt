@@ -5,6 +5,10 @@ body {
     font-family: Arial, Helvetica, sans-serif;
 }
 
+p {
+    font-size: 18px;
+}
+
 main {
     display: flex;
     flex-direction: column;
@@ -13,48 +17,50 @@ main {
 }
 
 .course {
-    background-color: #6F3C8B;
+    background-color: #002754;
 }
 
 button {
     color: white;
     border: none;
-    background-color: #6F3C8B;
+    background-color: #002754;
     font-weight: bold;
     padding: 10px 25px;
     max-height: 35px;
     min-width: 120px;
+    transition: background-color 0.3s ease;
+    cursor: pointer;
 }
 
-#courseOverviewCards {
-    margin: 100px 0 100px 0;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
+button:hover {
+    background-color: #3E5386;
+    cursor: pointer;
 }
 
-.courseCard {
-    width: calc(33.33% - 40px);
-    /* Adjust the width based on your design and margins */
-    margin: 20px;
-    text-align: center;
+.secondButtonStyle {
+    color: black;
+    border: 2px solid #002754;
     background-color: whitesmoke;
 }
 
+.secondButtonStyle:hover {
+    background-color: #E7EFFF;
+}
+
 .tech {
-    background-color: #AC407C;
+    background-color: #FF3333;
 }
 
 .social {
-    background-color: #FE845E;
+    background-color: #8338EC;
 }
 
 .business {
-    background-color: #FEBB58;
+    background-color: #FF006E;
 }
 
 .creative {
-    background-color: #E5586D;
+    background-color: #FFBE0B;
 }
 
 .courseCard img {
@@ -73,18 +79,27 @@ button {
 
 .courseCard p {
     margin-top: 5px;
-    font-size: 14px;
     /* Adjust the font size based on your design */
 }
 
 .workshopCompany {
-   
     font-size: 14px;
     font-weight: bold;
     color: rgb(70, 70, 70);
     letter-spacing: 2px;
 }
 
-.noShow  {
-    display:none;
+.noShow {
+    display: none;
+}
+
+.overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 8;
 }

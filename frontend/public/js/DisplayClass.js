@@ -10,7 +10,20 @@ export class Display
             
         static async startUp(ascending = false) {
             let workshops = await HSSApi.getWorkshops();
-            workshops = workshops.filter(element => {return new Date(element.start) >= new Date()});
+
+            let urllocation = window.location.href.split("/"); 
+            let side = urllocation[urllocation.length - 1];
+            switch (side) {
+
+                case "history.html":
+                    workshops = workshops.filter(element => {return new Date(element.start) < new Date()});
+                    break;
+        
+                default:
+                    workshops = workshops.filter(element => {return new Date(element.start) >= new Date()});
+                    break;
+            }
+            
            
             HSSUtil.sortByDate(workshops, ascending);
             Display.displayWorkshopsData(workshops);
@@ -40,7 +53,7 @@ export class Display
             });
         }
 
-        static displayOldWorkshops(data) {
+        static displayOldWorkshops() {
             let oldWorkshops = this.workshopObj.getOldWorkshops();
             Display.workshopDisplay.innerHTML="";
             oldWorkshops.forEach(element => {
@@ -108,11 +121,15 @@ export class Display
 
         // create element for each workshop
     static createWorkshopElement(workshop) {
+       
         const workshopElement = document.createElement('div');
+        const workshopId = workshop.id;
+
         workshopElement.classList.add('courseCard');
+        workshopElement.id = `workshop-${workshop.id}`;
 
         const startDato = Display.formatDato(workshop.start);
-        const statusTekst = workshop.status === 'completed' ? 'Kurset er desværre allerede fuldt booket' : 'stadig plads';
+        const statusTekst = workshop.status === 'closed' ? 'Kurset er desværre allerede fuldt booket' : 'stadig plads';
 
         // get city by locationAddress
         const locationAddress = workshop.locationAddress;
@@ -121,8 +138,8 @@ export class Display
         const city = parts.pop();
 
         // Limit the workshop description to 50 characters 
-        const truncatedDescription = workshop.description.length > 150 ?
-            workshop.description.slice(0, 150) + ' ...' :
+        const truncatedDescription = workshop.description.length > 80 ?
+            workshop.description.slice(0, 80) + ' ...' :
             workshop.description;
 
         workshopElement.innerHTML = `
@@ -135,9 +152,89 @@ export class Display
         <p class ="workshopCompany">${workshop.companyName} </p>
             <p class ="workshopDateAndLocation">${startDato}, ${city}</p>
             <p class ="workshopDiscription">${truncatedDescription}</p>
-            ${workshop.status !== 'completed' ? `<button class="button-link" onclick="redirectToPage('${workshop.workshopLink}')">Læs mere og tilmeld</button>` : `<p class="workshopStatus">${statusTekst}</p>`}
+            ${workshop.status !== 'closed' ? `<button class="button-link")">Læs mere og tilmeld</button>` : `<p id="workshopStatus">${statusTekst}</p>`}
         </div>
         `;
+
+    // Add the click event listener to open formPopup to each element with the class "button-link"
+    const cardButtons = document.querySelectorAll(".button-link");
+
+    const overlay = document.getElementById("overlay");
+    const popupForm = document.getElementById("formPopup");
+
+
+    function openForm() {
+
+        popupForm.style.display = "block";
+        overlay.style.display = "block"
+    }
+
+    function closeForm() {
+        popupForm.style.display = "none";
+        overlay.style.display = "none";
+    }
+    
+    cardButtons.forEach(card => {
+        
+        card.addEventListener('click', ()=> {
+            
+            let clickedWorkshopId = card.parentNode.parentNode.id.split("-");
+            clickedWorkshopId = clickedWorkshopId[clickedWorkshopId.length - 1];
+      
+            let allWorkshops = Display.workshopObj.workshops.filter(item => item.id == clickedWorkshopId);
+            createWorkshopPopup(allWorkshops[0]);
+            openForm();
+        });
+    });
+
+
+
+
+
+    
+    overlay.addEventListener("click", closeForm);
+    function createWorkshopPopup(workshop)
+    {
+    const workshopPopup = document.getElementById("formPopup");
+    workshopPopup.innerHTML = `
+        <div class="close-btn">X</div>
+        <div class="categoryBar"> ${workshop.categoryName}</div>
+        <div class="container">
+            <img class="workshopImage" src="${workshop.logo}" alt="${workshop.name}">
+            <h2 class="workshopTitle">${workshop.name}</h2>
+        </div>
+        <div class="workshopContent">
+            <p class="workshopCompany">${workshop.companyName} </p>
+            <p class="workshopDateAndLocation">${startDato}, ${city}</p>
+            <p class="workshopDiscription">${workshop.description}</p>
+            ${workshop.status !== 'closed' ? `<button class="button-link">Tilmeld</button>` : `<p id="workshopStatus">${statusTekst}</p>`}
+        </div>
+    `;
+        // Get the close button element and add a click event listener
+        const closeButton = workshopPopup.querySelector(".close-btn");
+        closeButton.addEventListener("click", closeForm);
+        const categoryPopupElement = workshopPopup.querySelector(".categoryBar");
+
+        switch (workshop.categoryName) {
+            case "Tech":
+                categoryPopupElement.classList.add("tech");
+                break;
+            case "Social":
+                categoryPopupElement.classList.add("social");
+                break;
+            case "Business":
+                categoryPopupElement.classList.add("business");
+                break;
+            case "Creative":
+                categoryPopupElement.classList.add("creative");
+                break;
+            default:
+                categoryPopupElement.classList.add("other");
+                break;
+        } 
+    }
+    
+
 
     // assign color to categoryBar by category
     const categoryElement = workshopElement.querySelector(".categoryBar");
@@ -145,7 +242,6 @@ export class Display
             case "Tech":
                 categoryElement.classList.add("tech");
                 break;
-            // Add more cases for other categories as needed
             case "Social":
                 categoryElement.classList.add("social");
                 break;
@@ -160,8 +256,14 @@ export class Display
                 break;
         }
 
+
         return workshopElement;
     }
+
+    
+
+    
+    
     static formatDato(datoStr) {
         const måneder = ['januar', 'februar', 'marts', 'april', 'maj', 'juni', 'juli', 'august', 'september', 'oktober', 'november', 'december'];
 
