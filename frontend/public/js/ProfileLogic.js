@@ -64,7 +64,7 @@ import {HSSApi} from './HSSApi.js';
                 //gemmer tilmeldte workshops i session storage
                
                 sessionStorage.setItem('tilmeldtWorkshops', JSON.stringify(response));
-                console.log(sessionStorage.getItem('tilmeldtWorkshops'));
+                ;
                 
             });
         }
@@ -140,18 +140,7 @@ window.onclick = function(event) {
 
 //let usernameInput = document.getElementById('login-username');
 //let passwordInput = document.getElementById('login-password');
-async function getUserInfo(id) {
-    console.log(id);
-    console.log("Session: " + sessionStorage.getItem('username'));
-    HSSApi.getAccount(id).then((response) => {
-        if (response.ok) {
-            sessionStorage.setItem('userId', response.id);
-            sessionStorage.setItem('userEmail',response.email);
-            sessionStorage.setItem('userType', response.accounttypeid);
-        }
-    });
-  
-}
+
 function checkLogin() {
     let username = document.getElementById('login-username').value;
     let password = document.getElementById('login-password').value;
@@ -234,8 +223,15 @@ function createAccount() {
 
 function markTilmeldtWorkshop() {
     const enrolledWorkshops = JSON.parse(sessionStorage.getItem('tilmeldtWorkshops'));
+    if (enrolledWorkshops == `Ingen workshops fundet for AccountID ${sessionStorage.getItem('userId')}`) {
+        return;
+    }
+
+
+
 
     if (enrolledWorkshops && enrolledWorkshops.length > 0) {
+
         enrolledWorkshops.forEach(workshop => {
             const workshopId = workshop.id;
             const workshopCard = document.getElementById(`workshop-${workshopId}`);
@@ -260,7 +256,8 @@ function markTilmeldtWorkshop() {
                 }
             }
         });
-    }
+    
+}
 }
 
 
@@ -294,4 +291,6 @@ function removeFromAccount(workshopId, button) {
         console.error('Error:', error);
     });
 }
+
+
 

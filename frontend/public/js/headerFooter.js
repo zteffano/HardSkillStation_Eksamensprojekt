@@ -45,26 +45,31 @@ class SpecialHeader extends HTMLElement {
             <div class="profile-picture">
             <img src="assets/images/thomas.png" alt="Thomas Sørensen" />
             <p style="text-align:center">⭐⭐⭐⭐</p> 
+            <div class="linkedin">
+            <p>Tilføj til Linkedin</p>
+            <img src="assets/images/linkedin_icon.png" alt="linkedin_icon" />
+        </div>   
         </div>
                 <div class="profile-header">
                   
                     <div class="profile-info">
                     
                     <p>Total XP: 250</p>
-                    <p>Skill level: expert</p>
+                    <p>Skill level: Expert</p>
                     <p>Courses completed: 3</p>
+                    
               
                     
                 </div>
                 
           
             </div>
-            <div class="linkedin">
-                <p>Add To Linkedin</p>
-                <img src="assets/images/linkedin_icon.png" alt="linkedin_icon" />
-            </div>      
-                <p class="joined">Joined: september 2023</p>
-                <button class="rate-button">View Archievements</button>
+       
+          
+            <div id="naesteWorkshopInfo">
+            
+            <!-- Workshop-informationer vil blive indsat her -->
+        </div>
             
             </div>
     
@@ -85,33 +90,24 @@ class SpecialHeader extends HTMLElement {
             let profileCard = document.querySelector('.profile-outer');
             let profilePicture = document.querySelector('.profile-icon');
             
-            profilePicture.addEventListener('mouseover', function() {
-                profileCard.classList.add('show'); // Add class to show the profile card
-        
+            profilePicture.addEventListener('click', function() {
+                let profilePicture = document.querySelector('.profile-icon');
+                if (profileCard.classList.contains('show')) {
+                    profileCard.classList.remove('show'); // Remove class to hide the profile card
+                    profilePicture.style.opacity = 1;  
+                } else {
+                    
+                    //display none
+                  
+                    profilePicture.style.opacity = 0.4;
 
-                let usernameHeader = document.querySelector('.username-header');
-                let profilePicture = document.querySelector('.profile-icon');
-                //display none
-                usernameHeader.style.opacity = 0.4;
-                profilePicture.style.opacity = 0.4;
+                profileCard.classList.add('show'); // Add class to show the profile card
+                visNaesteWorkshop();
+                }
+
             });
             
-            profilePicture.addEventListener('mouseout', function(event) {
-                if (!profileCard.contains(event.relatedTarget)) {
-                    profileCard.classList.remove('show'); // Remove class to hide the profile card
-                }
-                let usernameHeader = document.querySelector('.username-header');
-                let profilePicture = document.querySelector('.profile-icon');
-                //display block
-                usernameHeader.style.opacity = 1;
-                profilePicture.style.opacity = 1;  
-            });
-            
-            profileCard.addEventListener('mouseout', function(event) {
-                if (!profileButton.contains(event.relatedTarget)) {
-                    profileCard.classList.remove('show'); // Remove class to hide the profile card
-                }
-            });
+       
 
             
         } else {
@@ -166,6 +162,77 @@ class SpecialHeader extends HTMLElement {
                 link.style.textDecoration = "underline";
             }
         });
+
+        function visNaesteWorkshop() {
+            let tilmeldteWorkshops = JSON.parse(sessionStorage.getItem('tilmeldtWorkshops'));
+            console.log(tilmeldteWorkshops);
+            if (tilmeldteWorkshops == `Ingen workshops fundet for AccountID ${sessionStorage.getItem('userId')}`)
+            {
+               
+                let workshopInfoElement = document.getElementById('naesteWorkshopInfo');
+                workshopInfoElement.innerHTML = `<h2>Næste Workshop</h2>
+                <p>Du er ikke tilmeldt nogen workshops.</p>`;
+                return;
+            }
+        
+            // Filtrér for workshops i fremtiden og sortér dem efter dato
+            let kommendeWorkshops = tilmeldteWorkshops.filter(workshop => 
+                new Date(workshop.start) > new Date()
+            ).sort((a, b) => new Date(a.start) - new Date(b.start));
+        
+            // Vælg den første workshop, hvis der er nogen
+            if (kommendeWorkshops.length > 0) {
+                let naesteWorkshop = kommendeWorkshops[0];
+                visWorkshopInfo(naesteWorkshop);
+            }
+        }
+        
+        function visWorkshopInfo(workshop) {
+            let workshopInfoElement = document.getElementById('naesteWorkshopInfo');
+        
+            // Sætter workshop-billedet som baggrundsbillede
+            
+        
+            workshopInfoElement.innerHTML = `
+            
+                    <h2>Næste Workshop</h2>
+                    <p id="countdownTimer"></p>
+                    <h3>${workshop.name}</h3>
+                   
+                    <p>Dato: ${new Date(workshop.start).toLocaleDateString()}</p>
+                    
+                `;
+            opdaterCountdown(workshop.start);
+        }
+        
+        function opdaterCountdown(startDato) {
+            const countdownTimerElement = document.getElementById('countdownTimer');
+            const workshopStart = new Date(startDato);
+        
+            function opdaterTimer() {
+                const nu = new Date();
+                const resterendeTid = workshopStart - nu;
+        
+                if (resterendeTid > 0) {
+                    let dage = Math.floor(resterendeTid / (1000 * 60 * 60 * 24));
+                    let timer = Math.floor((resterendeTid % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                    let minutter = Math.floor((resterendeTid % (1000 * 60 * 60)) / (1000 * 60));
+                    let sekunder = Math.floor((resterendeTid % (1000 * 60)) / 1000);
+        
+                    countdownTimerElement.textContent = `${dage} dage ${timer} timer ${minutter} minutter ${sekunder} sekunder`;
+                } else {
+                    countdownTimerElement.textContent = 'Workshoppen er startet!';
+                    clearInterval(interval);
+                }
+            }
+        
+            // Opdater hver sekund
+            opdaterTimer(); // Opdater straks
+            const interval = setInterval(opdaterTimer, 1000);
+        }
+        
+        
+        
     }
 }
 
