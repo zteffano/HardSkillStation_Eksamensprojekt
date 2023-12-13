@@ -16,6 +16,7 @@ export class Display
             switch (side) {
 
                 case "history.html":
+                    
                     workshops = workshops.filter(element => {return new Date(element.start) < new Date()});
                     break;
         
@@ -178,12 +179,15 @@ export class Display
         
         card.addEventListener('click', ()=> {
             
+            if(!card.classList.contains("afmeld")) {
+
             let clickedWorkshopId = card.parentNode.parentNode.id.split("-");
             clickedWorkshopId = clickedWorkshopId[clickedWorkshopId.length - 1];
       
             let allWorkshops = Display.workshopObj.workshops.filter(item => item.id == clickedWorkshopId);
             createWorkshopPopup(allWorkshops[0]);
-            openForm();
+            openForm()
+            }
         });
     });
 
@@ -192,7 +196,7 @@ export class Display
 
 
     
-    overlay.addEventListener("click", closeForm);
+    //overlay.addEventListener("click", closeForm);
     function createWorkshopPopup(workshop)
     {
     const workshopPopup = document.getElementById("formPopup");
@@ -207,9 +211,37 @@ export class Display
             <p class="workshopCompany">${workshop.companyName} </p>
             <p class="workshopDateAndLocation">${startDato}, ${city}</p>
             <p class="workshopDiscription">${workshop.description}</p>
-            ${workshop.status !== 'closed' ? `<button class="button-link">Tilmeld</button>` : `<p id="workshopStatus">${statusTekst}</p>`}
+            ${workshop.status !== 'closed' ? `<button class="button-link tilmeld-button-popup">Tilmeld</button>` : `<p id="workshopStatus">${statusTekst}</p>`}
         </div>
     `;
+        let tilmeldButton = workshopPopup.querySelector(".tilmeld-button-popup");
+        tilmeldButton.addEventListener("click", () => {
+            //tilmelding og ny fetch af brugerens tilmelderiner
+            
+            HSSApi.addWorkshopToAccount(sessionStorage.getItem("userId"), workshop.id).then(response => {
+                   
+                    HSSApi.getAccountWorkshops(sessionStorage.getItem('userId')).then((response) => {
+          
+                        //gemmer tilmeldte workshops i session storage
+                       
+                        sessionStorage.setItem('tilmeldtWorkshops', JSON.stringify(response));
+                        console.log(sessionStorage.getItem('tilmeldtWorkshops'));
+                    }
+                        
+                  
+                );
+            });
+                
+                    
+
+                    
+            tilmeldButton.innerHTML = "Afmeld";
+            tilmeldButton.classList.add("afmeld");
+            
+            setTimeout(closeForm, 1000);
+            
+         
+        });
         // Get the close button element and add a click event listener
         const closeButton = workshopPopup.querySelector(".close-btn");
         closeButton.addEventListener("click", closeForm);
