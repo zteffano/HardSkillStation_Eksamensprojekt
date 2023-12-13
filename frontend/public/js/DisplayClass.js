@@ -32,17 +32,19 @@ export class Display
 
 
         
-        static displaySpecificNewWorkshops(categoryID) {
+        static displaySpecificNewWorkshops(categoryIDs) {
             let newWorkshops = this.workshopObj.getNewWorkshops()
-
-            Display.workshopDisplay.innerHTML="";
+        
+            Display.workshopDisplay.innerHTML = "";
             newWorkshops.forEach(element => {
-                if(element.categoryId == categoryID) {
+                if (categoryIDs.includes(element.categoryId)) {
                     const workshopElement = Display.createWorkshopElement(element);
                     Display.workshopDisplay.appendChild(workshopElement);
                 }
             });
         }
+        
+        
 
         static displayNewWorkshops() {
             let newWorkshops = this.workshopObj.getNewWorkshops()

@@ -118,7 +118,7 @@ button:hover {
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5);
     z-index: 1000;
-    /* Høj z-index for at sikre, at den ligger over andre elementer */
+   
 }
 
 .popup-content {
@@ -164,6 +164,7 @@ button:hover {
     padding: 20px;
     max-width: 350px;
     color: #333;
+    box-shadow: 0 4px 8px #002754;
 }
 
 .profile-header {
@@ -178,35 +179,19 @@ button:hover {
 .profile-picture img {
     display: flex;
     justify-content: center;
-    margin: 10px auto;
+    margin: 0px auto;
     width: 90px;
-    /* Adjust as necessary */
     border-radius: 50%;
-    border: 3px solid white;
+    border: 1px solid white;
 
 }
 
-.profile-details p,
-.profile-courses p,
-.achievements p {
-    margin: 5px 0;
-
-}
-
-.rate-button {
-    background-color: #002754;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    margin: 10px 0;
-    cursor: pointer;
-}
 
 
-.joined {
-    font-size: 0.7em;
-    text-align: center;
-}
+
+
+
+
 
 .username {
     text-decoration: underline;
@@ -226,6 +211,11 @@ button:hover {
     display: flex;
     justify-content: center;
     align-items: center;
+ 
+}
+.linkedin p{
+    margin: 0 0px;
+    font-size: 0.7em;
 }
 
 .linkedin img {
@@ -234,6 +224,7 @@ button:hover {
     width: 25px;
     border-radius: 50%;
     border: 3px solid white;
+    margin: 0 0px;
 
 }
 
@@ -266,10 +257,10 @@ button:hover {
 }
 
 .profile-icon img {
-    padding: 10px;
+    padding: 5px;
     display: flex;
     justify-content: center;
-    margin: 10px auto;
+    margin: 0px auto;
     width: 50px;
     border-radius: 50%;
     border: 3px solid white;
@@ -336,3 +327,52 @@ button:hover {
         right: 5%;
     }
 }
+#naesteWorkshopInfo {
+   
+  
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 0px 20px;
+    background-color: #fff;
+    max-width: 400px;
+    text-align: center;
+    margin-top:10px;
+
+
+}
+
+#naesteWorkshopInfo h2 {
+    color: #002754; 
+    margin-bottom: 15px; 
+    font-size: 1.5em; 
+    text-decoration: underline;
+}
+
+#naesteWorkshopInfo h3 {
+    color: #333;
+    margin-bottom: 10px;
+    font-size: 1em;
+}
+
+#naesteWorkshopInfo p {
+ 
+    color: #666;
+    font-size: 0.8em;
+    font-weight: bold;
+}
+
+#countdownTimer {
+    font-size: 0.8em;
+}
+
+.active-category {
+    box-shadow: 0 0 3px 5px rgba(255, 255, 255, 1);
+    color: white;
+
+    padding: 10px 20px;
+    margin: 10px 0;
+    cursor: pointer;
+    scale:1.1;
+}
+
