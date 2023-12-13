@@ -100,7 +100,7 @@ export class Display
                 let element = document.getElementById("companyDisplay");
                 element.innerHTML = "";
                 data.forEach(company => {
-                    element.innerHTML += company.name + "<br>"
+                    element.innerHTML += `• ${company.name}<br>`
                 })
                 
                 

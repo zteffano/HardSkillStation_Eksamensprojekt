@@ -10,14 +10,19 @@ main {
     height: 82.5vh;
     display: flex;
     justify-content: center;
+    align-items: center;
 }
 
 .aboutContent {
-    max-width: 1150px;
+    max-width: 1080px;
+    color: black;
     box-sizing: border-box;
     justify-content: center;
-    margin-bottom: 80px;
-    padding: 30px;
+    align-self: center;
+    margin-bottom: 30px;
+    padding: 45px 60px 50px 60px;
+    height: fit-content;
+    background-color: #E7EFFF;
 }
 
 .video-text-container {
@@ -46,7 +51,7 @@ main {
 
 .aboutHeading {
     font-size: 48px;
-    margin: 40px 0;
+    margin: 0 0 20px 0;
 }
 
 p {
@@ -54,12 +59,22 @@ p {
 }
 
 @media screen and (max-width: 768px) {
+    .about {
+        height: 72vh;
+    }
+
     .aboutContent {
         margin-bottom: 40px;
+        padding: 25px;
     }
 
     .aboutHeading {
         margin: 20px 0;
+        font-size: 30px;
+    }
+
+    h2 {
+        font-size: 20px;
     }
 
     .aboutText {

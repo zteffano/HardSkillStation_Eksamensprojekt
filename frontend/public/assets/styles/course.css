@@ -34,6 +34,17 @@
     padding-right: 11px;
 }
 
+#courseOverviewCards::after {
+    content: '';
+    flex: 31 1 min(73.33%, 540px);
+    margin-bottom: 20px;
+    box-sizing: border-box;
+    margin: 36px;
+    min-width: 300px;
+    max-width: 680px;
+    visibility: hidden;
+}
+
 .courseCard {
     flex: 1 1 min(33.33%, 300px);
     margin-bottom: 20px;
