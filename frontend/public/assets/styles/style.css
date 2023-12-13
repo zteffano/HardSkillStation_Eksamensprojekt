@@ -117,7 +117,8 @@ button:hover {
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5);
-    z-index: 1000; /* Høj z-index for at sikre, at den ligger over andre elementer */
+    z-index: 1000;
+    /* Høj z-index for at sikre, at den ligger over andre elementer */
 }
 
 .popup-content {
@@ -125,10 +126,10 @@ button:hover {
     flex-direction: column;
     gap: 20px;
     position: fixed;
-    background: white;
+    background: whitesmoke;
     width: 300px;
+    max-width: 300px;
     padding: 20px;
-    
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -139,7 +140,7 @@ button:hover {
     width: 100%;
     padding: 10px;
     border: 1px solid #ccc;
-    
+
     box-sizing: border-box;
 }
 
@@ -154,13 +155,12 @@ button:hover {
 /* Style til Profile side */
 
 .profile-card {
-    display:flex;
+    display: flex;
     flex-direction: column;
     justify-content: center;
     width: 300px;
-    background-color: #f3f3f3;
-    border: 1px solid #ddd;
-    border-radius: 8px;
+    background-color: whitesmoke;
+    border: 2px solid #002754;
     padding: 20px;
     max-width: 350px;
     color: #333;
@@ -173,29 +173,30 @@ button:hover {
     background-color: #002754;
     color: white;
     padding: 10px;
-    border-radius: 8px;
 }
 
 .profile-picture img {
     display: flex;
     justify-content: center;
     margin: 10px auto;
-    width: 90px; /* Adjust as necessary */
+    width: 90px;
+    /* Adjust as necessary */
     border-radius: 50%;
     border: 3px solid white;
-    
+
 }
 
-.profile-details p, .profile-courses p, .achievements p {
+.profile-details p,
+.profile-courses p,
+.achievements p {
     margin: 5px 0;
-   
+
 }
 
 .rate-button {
     background-color: #002754;
     color: white;
     border: none;
-    border-radius: 5px;
     padding: 10px 20px;
     margin: 10px 0;
     cursor: pointer;
@@ -203,23 +204,26 @@ button:hover {
 
 
 .joined {
-    font-size:0.7em;
+    font-size: 0.7em;
     text-align: center;
 }
+
 .username {
     text-decoration: underline;
     font-weight: bold;
     text-align: center;
-    
+
 }
+
 .user-email {
     text-align: center;
     opacity: 0.7;
     font-family: 'Courier New', Courier, monospace;
     font-size: 0.8em;
 }
+
 .linkedin {
-    display:flex;
+    display: flex;
     justify-content: center;
     align-items: center;
 }
@@ -227,41 +231,42 @@ button:hover {
 .linkedin img {
     display: flex;
     justify-content: center;
-    width: 25px; 
+    width: 25px;
     border-radius: 50%;
     border: 3px solid white;
-    
+
 }
+
 .profile-outer {
-    display: flex; /* Keep it hidden initially */
-    position: fixed; /* Take it out of the normal document flow */
-    background-color: #f3f3f3; 
-    z-index: 10000; 
-    top: 113px; 
-    right: 1%; 
-    box-shadow: 0 0 5px 5px #002754; /* Green glow */
-    visibility: hidden; /* Initially hidden */
-    opacity: 0; /* Start fully transparent */
-    transform: translateY(0px); /* Start slightly above */
-    transition: visibility 0s linear 0.3s, opacity 0.3s ease-out, transform 0.3s ease-out; /* Transition settings */
+    display: flex;
+    /* Keep it hidden initially */
+    position: fixed;
+    /* Take it out of the normal document flow */
+    background-color: whitesmoke;
+    z-index: 10000;
+    top: 113px;
+    right: 1%;
+    /* Green glow */
+    visibility: hidden;
+    /* Initially hidden */
+    opacity: 0;
+    /* Start fully transparent */
+    transform: translateY(0px);
+    /* Start slightly above */
+    transition: visibility 0s linear 0.3s, opacity 0.3s ease-out, transform 0.3s ease-out;
+    /* Transition settings */
 }
 
 .profile-header-container {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    
     padding: 10px;
-    
-
-
+    margin-left: 10px;
 }
 
-
-
 .profile-icon img {
-    
-    padding:10px;
+    padding: 10px;
     display: flex;
     justify-content: center;
     margin: 10px auto;
@@ -272,10 +277,14 @@ button:hover {
 }
 
 .profile-outer.show {
-    visibility: visible; /* Make visible */
-    opacity: 1; /* Fade in to full opacity */
-    transform: translateY(20px); /* Slide down to final position */
-    transition-delay: 0s; /* Apply transitions immediately */
+    visibility: visible;
+    /* Make visible */
+    opacity: 1;
+    /* Fade in to full opacity */
+    transform: translateY(20px);
+    /* Slide down to final position */
+    transition-delay: 0s;
+    /* Apply transitions immediately */
 }
 
 
@@ -309,11 +318,21 @@ button:hover {
     font-size: 24px;
     z-index: 1;
     text-align: center;
-    pointer-events: none; 
+    pointer-events: none;
 }
 
 .courseCard:hover {
     transform: scale(1.01);
     transition: transform 0.3s ease;
-  
+
+}
+
+@media (max-width: 600px) {
+    .popup-content {
+        width: 80%;
+    }
+
+    .profile-outer {
+        right: 5%;
+    }
 }

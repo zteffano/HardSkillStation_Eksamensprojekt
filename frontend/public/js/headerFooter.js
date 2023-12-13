@@ -29,17 +29,11 @@ class SpecialHeader extends HTMLElement {
                     
                     <div class="buttons">
                         <p class="languageSwitcher"><span style="font-weight: bold;">DK</span>|EN</p>
-                        <button id="vis-profil">Vis Profil</button>
                         <button id="logud" class="secondButtonStyle">Logud</button>
                     </div>
                     <div class="profile-header-container">
-                    <div class="profile-icon">
-                    <img src="assets/images/thomas.png" alt="Thomas Sørensen" />
-                  
-                    </div>
-                    <p class="username-header">${sessionStorage.getItem("username")}</p>
-                    </div>
-                    
+                    <div class="profile-icon" id="profile-icon">
+                    <img src="assets/images/thomas.png" alt="Thomas Sørensen" />                    
                 </div>
             </header>
             <div class="profile-outer">
@@ -76,21 +70,22 @@ class SpecialHeader extends HTMLElement {
     
         </div>
         `;
-            let visProfilBtn = document.getElementById("vis-profil");
+            // let visProfilBtn = document.getElementById("vis-profil");
             let logudBtn = document.getElementById("logud");
-            visProfilBtn.addEventListener("click", () => {
+            /* visProfilBtn.addEventListener("click", () => {
                 //go to profile page
                 window.location.href = "profile.html";
-            });
+            }); */
             logudBtn.addEventListener("click", () => {
                 //log out
                 sessionStorage.removeItem("username");
                 window.location.href = "index.html";
             });
-            let profileButton = document.getElementById('vis-profil');
+            // let profileButton = document.getElementById('vis-profil');
             let profileCard = document.querySelector('.profile-outer');
+            let profilePicture = document.querySelector('.profile-icon');
             
-            profileButton.addEventListener('mouseover', function() {
+            profilePicture.addEventListener('mouseover', function() {
                 profileCard.classList.add('show'); // Add class to show the profile card
         
 
@@ -101,7 +96,7 @@ class SpecialHeader extends HTMLElement {
                 profilePicture.style.opacity = 0.4;
             });
             
-            profileButton.addEventListener('mouseout', function(event) {
+            profilePicture.addEventListener('mouseout', function(event) {
                 if (!profileCard.contains(event.relatedTarget)) {
                     profileCard.classList.remove('show'); // Remove class to hide the profile card
                 }
@@ -147,29 +142,30 @@ class SpecialHeader extends HTMLElement {
                     </div>
                 </header>
             `;
-
-            // Find active link and change font size
-            const currentPage = window.location.pathname.split("/").pop(); // Determine current page
-            const navLinks = this.querySelectorAll(".nav-link");
-
-            var toggleButton = document.getElementsByClassName("toggle-button")[0];
-            var navbar = document.getElementsByClassName("navigation")[0];
-            var buttons = document.getElementsByClassName("buttons")[0];
-
-            toggleButton.addEventListener("click", () => {
-                navbar.classList.toggle("active");
-                buttons.classList.toggle("active");
-            });
-
-            navLinks.forEach((link) => {
-                const linkPage = link.getAttribute("href").split("/").pop();
-                if (linkPage === currentPage) {
-                    link.style.fontSize = "22px";
-                    link.style.color = "#002754";
-                    link.style.textDecoration = "underline";
-                }
-            });
         }
+        // Find active link and change font size
+        const currentPage = window.location.pathname.split("/").pop(); // Determine current page
+        const navLinks = this.querySelectorAll(".nav-link");
+
+        var toggleButton = document.getElementsByClassName("toggle-button")[0];
+        var navbar = document.getElementsByClassName("navigation")[0];
+        var buttons = document.getElementsByClassName("buttons")[0];
+        var profileIcon = document.getElementById("profile-icon");
+
+        toggleButton.addEventListener("click", () => {
+            navbar.classList.toggle("active");
+            buttons.classList.toggle("active");
+            profileIcon.classList.toggle("active");
+        });
+
+        navLinks.forEach((link) => {
+            const linkPage = link.getAttribute("href").split("/").pop();
+            if (linkPage === currentPage) {
+                link.style.fontSize = "22px";
+                link.style.color = "#002754";
+                link.style.textDecoration = "underline";
+            }
+        });
     }
 }
 
