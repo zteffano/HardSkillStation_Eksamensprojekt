@@ -8,8 +8,8 @@ from constants import BASE_URL, JSON_HEADER
 class TestAccountWorkshopEndpoints:
 
     TEST_ACCOUNT_WORKSHOP = {
-        "accountId": 1,
-        "workshopId": 2
+        "accountId": 50,
+        "workshopId": 1
     }
 
     def test_create_account_workshop_success(self):
@@ -30,7 +30,7 @@ class TestAccountWorkshopEndpoints:
         response = requests.get(BASE_URL + endpoint)
         assert response.status_code == 200
         response_data = response.json()
-        print(json.dumps(response_data, indent=2))
+        #print(json.dumps(response_data, indent=2))
         assert any(account_workshop["accountId"] == self.TEST_ACCOUNT_WORKSHOP["accountId"] for account_workshop in response_data)
         assert any(account_workshop["workshopId"] == self.TEST_ACCOUNT_WORKSHOP["workshopId"] for account_workshop in response_data)
       
@@ -45,8 +45,7 @@ class TestAccountWorkshopEndpoints:
 
 
     def test_delete_account_workshop(self):
-        import pytest
-        pytest.skip()
+
         ## Virker, når vores container på AWS er opdateret til nyeste version , men pt er den ikke det
         endpoint = f"/deleteaccountworkshop/{self.TEST_ACCOUNT_WORKSHOP['accountId']}/{self.TEST_ACCOUNT_WORKSHOP['workshopId']}"
         response = requests.delete(BASE_URL + endpoint)
