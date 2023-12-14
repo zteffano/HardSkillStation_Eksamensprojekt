@@ -36,8 +36,8 @@ import {HSSApi} from './HSSApi.js';
             <div class="popup-content">
                 <span class="close">&times;</span>
                 <h2>Log-in</h2>
-                <input id="login-username" class="login-input" type="text" placeholder="brugernavn" name="username" value="zteffano" required>
-                <input id="login-password" class="login-input" type="password" placeholder="password" name="password" value="zteffano" required>
+                <input id="login-username" class="login-input" type="text" placeholder="brugernavn" name="username"  required>
+                <input id="login-password" class="login-input" type="password" placeholder="password" name="password" required>
                 <button id="login-submit" class="button" type="submit">Login</button>
                 <p id="login-message"></p>
             </div>
