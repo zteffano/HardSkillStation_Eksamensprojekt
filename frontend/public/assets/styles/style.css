@@ -67,19 +67,16 @@ button:hover {
     width: 100%;
     height: auto;
     max-height: 150px;
-    /* Adjust the maximum height based on your design */
     object-fit: cover;
 }
 
 .courseCard h2 {
     margin-top: 10px;
     font-size: 18px;
-    /* Adjust the font size based on your design */
 }
 
 .courseCard p {
     margin-top: 5px;
-    /* Adjust the font size based on your design */
 }
 
 .workshopCompany {
@@ -118,7 +115,7 @@ button:hover {
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5);
     z-index: 1000;
-   
+
 }
 
 .popup-content {
@@ -211,9 +208,10 @@ button:hover {
     display: flex;
     justify-content: center;
     align-items: center;
- 
+
 }
-.linkedin p{
+
+.linkedin p {
     margin: 0 0px;
     font-size: 0.7em;
 }
@@ -283,16 +281,15 @@ button:hover {
 
 .afmeld {
     background-color: #FF3333;
-    color: white;
-    border: none;
-    border-radius: 5px;
     padding: 10px 20px;
     margin: 10px 0;
-    cursor: pointer;
+    color: black;
+    border: 2px solid #002754;
+    background-color: whitesmoke;
 }
 
 .afmeld:hover {
-    background-color: #FF6666;
+    background-color: #E7EFFF;
 }
 
 .tilmeldt-overlay {
@@ -327,9 +324,10 @@ button:hover {
         right: 5%;
     }
 }
+
 #naesteWorkshopInfo {
-   
-  
+
+
     border: 1px solid #ddd;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -337,15 +335,15 @@ button:hover {
     background-color: #fff;
     max-width: 400px;
     text-align: center;
-    margin-top:10px;
+    margin-top: 10px;
 
 
 }
 
 #naesteWorkshopInfo h2 {
-    color: #002754; 
-    margin-bottom: 15px; 
-    font-size: 1.5em; 
+    color: #002754;
+    margin-bottom: 15px;
+    font-size: 1.5em;
     text-decoration: underline;
 }
 
@@ -356,7 +354,7 @@ button:hover {
 }
 
 #naesteWorkshopInfo p {
- 
+
     color: #666;
     font-size: 0.8em;
     font-weight: bold;
@@ -373,6 +371,5 @@ button:hover {
     padding: 10px 20px;
     margin: 10px 0;
     cursor: pointer;
-    scale:1.1;
+    scale: 1.1;
 }
-
