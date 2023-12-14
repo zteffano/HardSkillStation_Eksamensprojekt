@@ -1,6 +1,6 @@
   <div align="center">
   
-  <img src="frontend\public\assets\images\HSS_Logo.png" alt="logo" width="400" height="auto" />
+  <img src="frontend\public\assets\images\HSS_Logo.webp" alt="logo" width="400" height="auto" />
  
   
   --- 
@@ -103,36 +103,28 @@ Clone af projektet
 ```
 
 
-Gå til projektmappen
+Build af backend med Docker
 ```bash
- cd HardSkillStation_Eksamensprojekt/
+ cd HardSkillStation_Eksamensprojekt/backend/WEBAPI_SOLUTION
+ docker build -t hsswebapi  -f HSS_WEBAPI_MICROSERVICE/Dockerfile .
  ```
 
-
-Installere dependencies
+Lokal kørsel af WebApi på port 1337 (localhost:1337)
 
 ```bash
-<....>
+docker run  --name <webapi-navn> -e DB_SERVER=<serveraddresse> -e DB_DATABASENAME=<databasenavn> -e DB_USER=<username> -e DB_PASSWORD=<password> -p 1337:80 -d hsswebapi:latest
  ```
 
-Opsætning af MySQL connection & Database migration
-
-```bash
-<....>
-```
-
-Indtast dit Web api url
+Justerer Endpoints i HSSApi.js til korrekt addresse
 
 ```javascript
-
-const API = "http://localhost:5555" // Dit Web api endpoint
-
+// hvis du kører lokalt brug localhost:1337
+const BASE_URL = "http://hss.zteffano.dk:1337" //Skift denne
 ```
 
-
 Start frontend server
-
 ```bash
+cd HardSkillStation_Eksamensprojekt/frontend/public
 npm start
  ```
 
