@@ -349,3 +349,17 @@ button:hover {
 #countdownTimer {
     font-size: 0.8em;
 }
+
+.disabled-button {
+    box-shadow: none;
+    background-color: #ddd;
+}
+
+.disabled-button:hover {
+    background-color: #ddd;
+    cursor: not-allowed;
+}
+
+.languageSwitcher {
+    cursor: pointer;
+}
