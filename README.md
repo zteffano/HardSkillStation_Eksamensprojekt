@@ -5,7 +5,7 @@
   
   --- 
   
-  <h1>Eksamensprojekt PBW & PBI - Gruppe 2</h1>
+  <h1>Eksamensprojekt PBW & PBI - Gruppe 1</h1>
   
   <p>
     Eksamensprojektet med udgangspunkt i Hard Skill station som en CASE!
