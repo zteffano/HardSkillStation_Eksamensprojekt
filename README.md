@@ -66,7 +66,11 @@ Der er et projektmøde i projektuge 1, hvor projektplanen skal godkendes.
 <!-- OM PRODUKTET -->
 ## 🎯 Vores Produkt
 <div id="resultat">
-Vi har bla bla bla...
+Hard Skills Station er en innovativ platform designet til at forbinde studerende og alumner fra Koldings campuser med lokale virksomheder, der tilbyder eftertragtede workshops og kurser. Dette projekt er udviklet med en dyb forståelse af brugerbehov gennem omfattende UX design og research. Vores løsning inkluderer en brugervenlig hjemmeside, der er nem at navigere og giver mulighed for selvstændig opdatering af indhold af personalet. Den giver et klart overblik over både kommende og tidligere kurser og er tilgængelig på både dansk og engelsk.
+
+Teknisk set anvender vi en microservice arkitektur for effektiv datahåndtering og nem integration med samarbejdspartnere gennem et moderne Web API. Platformens robusthed og tilgængelighed er forbedret ved hjælp af cloud-baserede løsninger, hvilket sikrer en fleksibel og skalerbar infrastruktur klar til fremtidige behov og teknologier.
+
+Gennem denne platform, tilbyder vi Hard Skills Station en omfattende løsning til formidling og administration af deres udbud af kurser og workshops, styrket af moderne teknologi og et brugerdrevet design.
 <br><br>
 
 ## :hammer_and_pick: Projekt Værktøjer
