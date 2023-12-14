@@ -180,21 +180,12 @@ button:hover {
     width: 90px;
     border-radius: 50%;
     border: 1px solid white;
-
 }
-
-
-
-
-
-
-
 
 .username {
     text-decoration: underline;
     font-weight: bold;
     text-align: center;
-
 }
 
 .user-email {
@@ -312,7 +303,6 @@ button:hover {
 .courseCard:hover {
     transform: scale(1.01);
     transition: transform 0.3s ease;
-
 }
 
 @media (max-width: 600px) {
@@ -326,8 +316,6 @@ button:hover {
 }
 
 #naesteWorkshopInfo {
-
-
     border: 1px solid #ddd;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -336,8 +324,6 @@ button:hover {
     max-width: 400px;
     text-align: center;
     margin-top: 10px;
-
-
 }
 
 #naesteWorkshopInfo h2 {
@@ -364,12 +350,16 @@ button:hover {
     font-size: 0.8em;
 }
 
-.active-category {
-    box-shadow: 0 0 3px 5px rgba(255, 255, 255, 1);
-    color: white;
+.disabled-button {
+    box-shadow: none;
+    background-color: #ddd;
+}
 
-    padding: 10px 20px;
-    margin: 10px 0;
+.disabled-button:hover {
+    background-color: #ddd;
+    cursor: not-allowed;
+}
+
+.languageSwitcher {
     cursor: pointer;
-    scale: 1.1;
 }

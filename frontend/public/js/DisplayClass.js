@@ -124,6 +124,9 @@ export class Display
 
         // create element for each workshop
     static createWorkshopElement(workshop) {
+
+        let urllocation = window.location.href.split("/"); 
+        let side = urllocation[urllocation.length - 1];
        
         const workshopElement = document.createElement('div');
         const workshopId = workshop.id;
@@ -145,6 +148,28 @@ export class Display
             workshop.description.slice(0, 80) + ' ...' :
             workshop.description;
 
+        switch (side) {
+
+            case "history.html":
+                workshopElement.innerHTML = `
+        <div class="categoryBar"> ${workshop.categoryName}</div>
+        <div class="container">
+            <img class="workshopImage" src="${workshop.logo}" alt="${workshop.name}">
+            <h2 class="workshopTitle">${workshop.name}</h2>
+        </div>
+        <div class="workshopContent">
+        <p class ="workshopCompany">${workshop.companyName} </p>
+            <p class ="workshopDateAndLocation">${startDato}, ${city}</p>
+            <p class ="workshopDiscription">${truncatedDescription}</p>
+            <button disabled="true" class="disabled-button">Afsluttet</button>
+        </div>
+        `;
+
+
+            break;
+
+            default:
+
         workshopElement.innerHTML = `
         <div class="categoryBar"> ${workshop.categoryName}</div>
         <div class="container">
@@ -158,6 +183,8 @@ export class Display
             ${workshop.status !== 'closed' ? `<button class="button-link")">Læs mere og tilmeld</button>` : `<p id="workshopStatus">${statusTekst}</p>`}
         </div>
         `;
+        break;
+        }
 
     // Add the click event listener to open formPopup to each element with the class "button-link"
     const cardButtons = document.querySelectorAll(".button-link");
